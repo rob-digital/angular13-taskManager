@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from '../../dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,14 +17,16 @@ export class DashboardComponent implements OnInit {
   ProjectCost: number = 0;
   CurrentExpenditure: number = 0;
   AvailableFunds: number = 0;
+  Today: Date;
 
   Clients: string[] = []
   Projects: any = []
   Years: number[] = []
-  TeamMembersSummary: any = []
+  TeamMembersSummary:any = []
   TeamMembers: any = []
 
-  constructor() { }
+  // must use private keyword while injecting service
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
 
@@ -32,10 +35,13 @@ export class DashboardComponent implements OnInit {
     this.NoOfTeamMembers = 67;
     this.TotalCostOfAllProjects = 240;
     this.PendingTasks = 15;
-    this.UpComingProjects = 2;
+    this.UpComingProjects = 0.2;
     this.ProjectCost = 2113507;
     this.CurrentExpenditure = 96788;
     this.AvailableFunds = 52536;
+    this.Today = new Date();
+    // injecting service through the constructor
+    this.TeamMembersSummary = this.dashboardService.getTeamMembersSummary();
 
     this.Clients = [
       'ABC Infotech Ltd.',
@@ -54,28 +60,6 @@ export class DashboardComponent implements OnInit {
       this.Years.push(i)
     }
 
-    this.TeamMembersSummary = [
-      {
-        Region: 'East',
-        TeamMembersCount: 20,
-        TemporarilyUnavailableMembers: 4,
-      },
-      {
-        Region: 'West',
-        TeamMembersCount: 15,
-        TemporarilyUnavailableMembers: 8,
-      },
-      {
-        Region: 'South',
-        TeamMembersCount: 17,
-        TemporarilyUnavailableMembers: 1,
-      },
-      {
-        Region: 'North',
-        TeamMembersCount: 15,
-        TemporarilyUnavailableMembers: 6,
-      },
-    ];
 
 
   this.TeamMembers = [
