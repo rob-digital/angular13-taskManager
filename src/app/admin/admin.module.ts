@@ -5,7 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AboutComponent } from './about/about.component';
 import { DashboardService } from '../dashboard.service';
 import { ProjectsComponent } from './projects/projects.component';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { ProjectsComponent } from './projects/projects.component';
   ],
   imports: [
     CommonModule,
-
+    FormsModule,
   ],
   providers: [
     DashboardService    // add service to providers array, here

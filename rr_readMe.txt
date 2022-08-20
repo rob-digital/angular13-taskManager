@@ -1,6 +1,13 @@
 to start:
 	ng serve --open
 
+  to start server:
+  locate nodejs folder
+  npm install
+  node index.js
+
+username: admin
+password: admin123#
   ==================================================================
 
   How to run node.js source code [for to Non-Asp.Net Core Developers]

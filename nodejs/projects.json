@@ -1,0 +1,19 @@
+{
+  "projects":
+    [
+      {"projectID":1,"projectName":"Holiday Destination Search","dateOfStart":"2023-05-01","teamSize":6},
+      {"projectID":2,"projectName":"COVID-19 Tracker","dateOfStart":"2020-03-15","teamSize":170},
+      {"projectID":4,"projectName":"Hello from Scotland","dateOfStart":"2022-08-10","teamSize":9},
+      {"projectID":10,"projectName":"SSSSSSSSSSSS","dateOfStart":"2022-08-28","teamSize":1}
+    ],
+  "roles":
+    [
+      {"id":1,"roleName":"Admin"}
+      ,{"id":2,"roleName":"Employee"}
+    ],
+  "users":
+    [
+      {"id":1,"UserName":"admin","Email":"admin@gmail.com","Password":"Admin123#","role":1},
+      {"id":9,"UserName":"a","Email":"admin@gmail.com","Password":"a","role":1}
+    ]
+}
