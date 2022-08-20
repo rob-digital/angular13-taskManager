@@ -15,27 +15,27 @@ export class ProjectsService {
 
   getAllProjects(): Observable<Project[]>
   {
-    let currentUser = { token: "" }
+    let currentUser = { token: "" };
     let headers = new HttpHeaders();
-    headers = headers.set("Authorization", "Bearer ")   // mind the space after Bearer_
+    headers = headers.set("Authorization", "Bearer ");
 
-    if (sessionStorage.currentUser != null) {
-      currentUser = JSON.parse(sessionStorage.currentUser)
-      headers = headers.set("Authorization", "Bearer " + currentUser.token)
+    if (sessionStorage['currentUser'] != null)
+    {
+      currentUser = JSON.parse(sessionStorage['currentUser']);
+      headers = headers.set("Authorization", "Bearer " + currentUser.token);
     }
-
-    return this.httpClient.get<Project[]>(this.urlPrefix + "/api/projects", { headers: headers, responseType: "json"})
-            // check https://rxjs.dev/guide/operators
-            .pipe(map(
-              (data) => {
-                console.log("data... ", data);
-
-                for (let i = 0; i < data.length; i++) {
-                  data[i].teamSize = data[i].teamSize * 100
-                }
-
-                return data
-              }))
+    return this.httpClient.get<Project[]>(this.urlPrefix + "/api/projects", { headers: headers, responseType: "json" })
+      // check https://rxjs.dev/guide/operators
+      .pipe(map(
+        (data: Project[]) =>
+        {
+          for (let i = 0; i < data.length; i++)
+          {
+            data[i].teamSize = data[i].teamSize * 100;
+          }
+          return data;
+        }
+      ));
   }
 
 

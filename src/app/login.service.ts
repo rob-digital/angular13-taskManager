@@ -9,6 +9,8 @@ import { map } from 'rxjs/operators';
 })
 export class LoginService {
 
+  urlPrefix: string = "http://localhost:9090";
+  
   constructor(private httpClient: HttpClient)
   {
   }
@@ -17,15 +19,13 @@ export class LoginService {
 
   public Login(loginViewModel: LoginViewModel): Observable<any>
   {
-    return this.httpClient.post<any>("http://localhost:9090/authenticate", loginViewModel, { responseType: "json" })
+    return this.httpClient.post<any>(this.urlPrefix + "/authenticate", loginViewModel, { responseType: "json" })
       .pipe(map(user =>
       {
-        console.log("User" ,user);
-
         if (user)
         {
           this.currentUserName = user.userName;
-          sessionStorage.currentUser = JSON.stringify(user);
+          sessionStorage['currentUser'] = JSON.stringify(user);
         }
         return user;
       }));
