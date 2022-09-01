@@ -15,16 +15,16 @@ export class ProjectsService {
 
   getAllProjects(): Observable<Project[]>
   {
-    let currentUser = { token: "" };
-    let headers = new HttpHeaders();
-    headers = headers.set("Authorization", "Bearer ");
+    // let currentUser = { token: "" };               // manually create JWT
+    // let headers = new HttpHeaders();
+    // headers = headers.set("Authorization", "Bearer ");
 
-    if (sessionStorage['currentUser'] != null)
-    {
-      currentUser = JSON.parse(sessionStorage['currentUser']);
-      headers = headers.set("Authorization", "Bearer " + currentUser.token);
-    }
-    return this.httpClient.get<Project[]>(this.urlPrefix + "/api/projects", { headers: headers, responseType: "json" })
+    // if (sessionStorage['currentUser'] != null)
+    // {
+    //   currentUser = JSON.parse(sessionStorage['currentUser']);
+    //   headers = headers.set("Authorization", "Bearer " + currentUser.token);
+    // }
+    return this.httpClient.get<Project[]>(this.urlPrefix + "/api/projects", { responseType: "json" })
       // check https://rxjs.dev/guide/operators
       .pipe(map(
         (data: Project[]) =>

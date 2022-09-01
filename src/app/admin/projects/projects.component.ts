@@ -26,11 +26,11 @@ export class ProjectsComponent implements OnInit {
       (response: Project[]) => {
         this.projects = response;
       },
-      (error) => {
-        console.log("Error while retriving projects:" , error);
-        alert("Authentication failed");
+      // (error) => {
+      //   console.log("Error while retriving projects:" , error);
+      //   alert("Authentication failed");
 
-      }
+      // }
     )
   }
 

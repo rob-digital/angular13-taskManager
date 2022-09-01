@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpBackend, HttpClient } from '@angular/common/http';
 import { LoginViewModel } from './login-view-model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,8 @@ import { map } from 'rxjs/operators';
 export class LoginService {
 
   urlPrefix: string = "http://localhost:9090";
-  
-  constructor(private httpClient: HttpClient)
+  private httpClient: HttpClient
+  constructor(private httpBackend: HttpBackend, private jwtHelperService: JwtHelperService)
   {
   }
 
@@ -19,6 +20,8 @@ export class LoginService {
 
   public Login(loginViewModel: LoginViewModel): Observable<any>
   {
+    this.httpClient = new HttpClient(this.httpBackend)
+
     return this.httpClient.post<any>(this.urlPrefix + "/authenticate", loginViewModel, { responseType: "json" })
       .pipe(map(user =>
       {
@@ -35,5 +38,18 @@ export class LoginService {
   {
     sessionStorage.removeItem("currentUser");
     this.currentUserName = null;
+  }
+
+  public isAuthenticated(): boolean
+  {
+    let token = sessionStorage.getItem("currentUser")
+                  ? JSON.parse(sessionStorage.getItem("currentUser")).token
+                  : null;
+
+    if (this.jwtHelperService.isTokenExpired()) {
+      return false
+    } else {
+      return true
+    }
   }
 }
